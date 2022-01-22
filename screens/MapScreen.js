@@ -1,15 +1,34 @@
-import { View, Text, SafeAreaView, Image } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 import tw from "tailwind-react-native-classnames";
-import NavOptions from '../components/NavOptions';
+import Map from '../components/Map';
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import NavigateCard from '../components/NavigateCard';
+import RideOptionsCard from '../components/RideOptionsCard';
 
 const HomeScreen = () => {
+  const Stack = createNativeStackNavigator()
   return (
-      <SafeAreaView>
-        <View style={tw`p-5`}>
-            <Text>Hello Maps</Text>
-        </View>
-      </SafeAreaView>
+      <View style={{backgroundColor:"white"}}>
+          <View style={{height:"60%"}}>
+            <Map/>  
+          </View> 
+          <View style={{height: "40%"}}>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="NavigateCard"
+                component={NavigateCard}
+                options={{headerShown:false}}
+              />
+              <Stack.Screen
+                name="RideOptionsCard"
+                component={RideOptionsCard}
+                options={{headerShown:false}}
+              />
+            </Stack.Navigator>
+          </View> 
+      </View>
   );
 };
 
